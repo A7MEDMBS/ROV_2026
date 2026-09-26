@@ -1,0 +1,4 @@
+../Core/Src/qmc5883l.c:3:6:QMC5883L_Init	40	static
+../Core/Src/qmc5883l.c:23:6:QMC5883L_Calibrate	56	static
+../Core/Src/qmc5883l.c:46:9:QMC5883L_Update	112	static
+../Core/Src/qmc5883l.c:77:7:QMC5883L_GetTiltCompensatedHeading	56	static

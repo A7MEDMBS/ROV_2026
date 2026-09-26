@@ -1,0 +1,6 @@
+../Core/Src/ms5540c.c:10:6:MS5540C_Init	4
+../Core/Src/ms5540c.c:38:6:MS5540C_Reset	1
+../Core/Src/ms5540c.c:43:10:Read_Calibration_Word	1
+../Core/Src/ms5540c.c:58:10:Read_Pressure	1
+../Core/Src/ms5540c.c:74:10:Read_Temperature	1
+../Core/Src/ms5540c.c:90:9:MS5540C_Update	5

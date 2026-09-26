@@ -1,0 +1,17 @@
+# STM32 & C/C++ Build Files
+Debug/
+Release/
+*.elf
+*.hex
+*.bin
+*.map
+*.o
+*.d
+.metadata/
+
+# C# WPF Build Files
+bin/
+obj/
+.vs/
+*.user
+*.suo

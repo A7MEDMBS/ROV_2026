@@ -1,0 +1,85 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\TC\\source\\repos\\ROV GUI Control\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F39B4E08-28A9-4DBB-B671-0926C6B8811F}|ROV GUI Control.csproj|c:\\users\\tc\\source\\repos\\rov gui control\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F39B4E08-28A9-4DBB-B671-0926C6B8811F}|ROV GUI Control.csproj|solutionrelative:viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F39B4E08-28A9-4DBB-B671-0926C6B8811F}|ROV GUI Control.csproj|c:\\users\\tc\\source\\repos\\rov gui control\\viewmodels\\joystick.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F39B4E08-28A9-4DBB-B671-0926C6B8811F}|ROV GUI Control.csproj|solutionrelative:viewmodels\\joystick.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F39B4E08-28A9-4DBB-B671-0926C6B8811F}|ROV GUI Control.csproj|C:\\Users\\TC\\source\\repos\\ROV GUI Control\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F39B4E08-28A9-4DBB-B671-0926C6B8811F}|ROV GUI Control.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F39B4E08-28A9-4DBB-B671-0926C6B8811F}|ROV GUI Control.csproj|C:\\Users\\TC\\source\\repos\\ROV GUI Control\\visiontask\\detection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F39B4E08-28A9-4DBB-B671-0926C6B8811F}|ROV GUI Control.csproj|solutionrelative:visiontask\\detection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "JOYStick.cs",
+              "DocumentMoniker": "C:\\Users\\TC\\source\\repos\\ROV GUI Control\\ViewModels\\JOYStick.cs",
+              "RelativeDocumentMoniker": "ViewModels\\JOYStick.cs",
+              "ToolTip": "C:\\Users\\TC\\source\\repos\\ROV GUI Control\\ViewModels\\JOYStick.cs",
+              "RelativeToolTip": "ViewModels\\JOYStick.cs",
+              "ViewState": "AgIAAKsAAAAAAAAAAAAAALcAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-12T05:43:07.878Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Detection.cs",
+              "DocumentMoniker": "C:\\Users\\TC\\source\\repos\\ROV GUI Control\\VisionTask\\Detection.cs",
+              "RelativeDocumentMoniker": "VisionTask\\Detection.cs",
+              "ToolTip": "C:\\Users\\TC\\source\\repos\\ROV GUI Control\\VisionTask\\Detection.cs",
+              "RelativeToolTip": "VisionTask\\Detection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-12T03:52:34.606Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\TC\\source\\repos\\ROV GUI Control\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Users\\TC\\source\\repos\\ROV GUI Control\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-07-12T03:45:16.253Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\TC\\source\\repos\\ROV GUI Control\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\MainViewModel.cs",
+              "ToolTip": "C:\\Users\\TC\\source\\repos\\ROV GUI Control\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAHIGAAAAAAAAAAAgwOIGAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-04T02:30:36.865Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+../Core/Src/mapping.c:62:6:Build_Allocation_Matrix	2
+../Core/Src/mapping.c:76:5:Cholesky_Solve	12
+../Core/Src/mapping.c:120:6:Mat_ATA_ATu	7
+../Core/Src/mapping.c:141:5:Allocate_Thrusters	2
+../Core/Src/mapping.c:150:5:Allocate_Thrusters_Bounded	28
+../Core/Src/mapping.c:237:6:Thruster_Map_Init	1
+../Core/Src/mapping.c:245:7:Thrust_To_PWM	5
+../Core/Src/mapping.c:256:6:Map_All_To_PWM	2
+../Core/Src/mapping.c:261:5:Allocate_And_Map	3
+../Core/Src/mapping.c:275:7:Allocation_Residual_Norm	3
+../Core/Src/mapping.c:288:6:u_zero	2

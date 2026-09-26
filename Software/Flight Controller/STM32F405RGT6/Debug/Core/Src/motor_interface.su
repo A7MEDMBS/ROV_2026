@@ -1,0 +1,16 @@
+../Core/Src/motor_interface.c:7:6:ThrusterTask	40	static
+../Core/Src/motor_interface.c:114:6:Thrusters_Init	48	static
+../Core/Src/motor_interface.c:133:6:Thruster_EnableAll	16	static
+../Core/Src/motor_interface.c:138:6:Thruster_DisableAll	16	static
+../Core/Src/motor_interface.c:143:6:Thruster_EnableOne	24	static
+../Core/Src/motor_interface.c:148:6:Thruster_DisableOne	24	static
+../Core/Src/motor_interface.c:154:6:Thruster_Set_timer	24	static
+../Core/Src/motor_interface.c:158:6:Thruster_SetSpeed	16	static
+../Core/Src/motor_interface.c:164:6:Thruster_SetDirection	16	static
+../Core/Src/motor_interface.c:167:6:SetSpeed	24	static
+../Core/Src/motor_interface.c:173:6:Thruster_Stop	24	static
+../Core/Src/motor_interface.c:192:9:Thruster_GetSpeed	16	static
+../Core/Src/motor_interface.c:197:19:Thruster_GetDirection	16	static
+../Core/Src/motor_interface.c:203:17:Thruster_CheckStatus	24	static
+../Core/Src/motor_interface.c:238:6:Thruster_id_HandleFault	16	static
+../Core/Src/motor_interface.c:244:6:Move_Update	72	static

@@ -1,0 +1,4 @@
+../Core/Src/hmc5883l.c:3:6:HMC5883L_Init	40	static
+../Core/Src/hmc5883l.c:25:6:HMC5883L_Calibrate	64	static
+../Core/Src/hmc5883l.c:47:9:HMC5883L_Update	112	static
+../Core/Src/hmc5883l.c:73:7:HMC5883L_GetTiltCompensatedHeading	56	static

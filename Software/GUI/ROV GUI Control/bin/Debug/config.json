@@ -1,0 +1,42 @@
+{
+  "LocalIP": "192.168.0.104",
+  "RemoteIP": "192.168.0.102",
+  "UserName": "rov",
+  "Password": "rov2025",
+  "LocalPort": 14550,
+  "RemotePort": 14500,
+  "Cam1_Port": 7000,
+  "Cam2_Port": 5000,
+  "Cam3_Port": 6000,
+  "Vision_LocalPort": 15000,
+  "Vision_RemotePort": 16000,
+  "PyFile": "C:\\python312\\python3.exe",
+  "Task1_Path": "C:\\python312\\Task_1.py",
+  "Task2_Path": "C:\\python312\\Task_1.py",
+  "Task3_Path": "C:\\python312\\Task_1.py",
+  "Task4_Path": "C:\\python312\\Task_1.py",
+  "RollPID": {
+    "Kp": 0.100000001,
+    "Ki": 0,
+    "Kd": 0,
+    "Alpha": 0.100000001,
+    "AntiWindup": 1
+  },
+  "PitchPID": {
+    "Kp": 0.100000001,
+    "Ki": 0,
+    "Kd": 0,
+    "Alpha": 0.100000001,
+    "AntiWindup": 1
+  },
+  "DepthPID": {
+    "Kp": 0.100000001,
+    "Ki": 0,
+    "Kd": 0,
+    "Alpha": 0.100000001,
+    "AntiWindup": 1
+  },
+  "AtmosphericPressure": 1009,
+  "RollOFFSET": 11.5,
+  "PitchOFFSET": -6.94999981
+}

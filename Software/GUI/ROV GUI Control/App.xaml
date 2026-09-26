@@ -1,0 +1,9 @@
+﻿<Application x:Class="ROV_GUI_Control.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ROV_GUI_Control"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <CubicEase x:Key="EaseOut" EasingMode="EaseOut"/>
+    </Application.Resources>
+</Application>

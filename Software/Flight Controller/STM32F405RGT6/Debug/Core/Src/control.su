@@ -1,0 +1,2 @@
+../Core/Src/control.c:6:6:ThrusterControlTask	56	static
+../Core/Src/control.c:53:6:Control_System_Init	64	static
