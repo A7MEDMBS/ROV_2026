@@ -67,6 +67,7 @@ The system relies on the **MAVLink Protocol** to ensure lightweight, checksum-ve
 ---
 
 ## 👨‍💻 Development
-**Assiut Robotics - Assiut University**  
-*(Computer and Control Systems Department)*
+**Assiut Robotics Team**  
+*Faculty of Engineering, Assiut University*  
+*(Computer and Control Systems Department)*  
 *   **Ahmed Mostafa Bakr Selim** - *Control Software Lead & Architecture*
