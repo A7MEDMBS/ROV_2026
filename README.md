@@ -28,6 +28,24 @@ Developed in C utilizing the STM32 HAL, focused on fault tolerance and sensor fu
 *   **Custom I2C/SPI Drivers:** Bare-metal implementations for the MPU6050 (IMU), QMC5883L (Compass), and MS5540C (Pressure).
 *   **Tilt Compensation:** The QMC5883L driver mathematically fuses magnetic vectors with the IMU's Alpha-filtered Roll and Pitch data to provide highly accurate heading regardless of vehicle orientation.
 
+## 🔌 Hardware & Thruster Configuration
+The vehicle is propelled by **6 Blue Robotics T200 Thrusters** arranged in a custom vectored configuration to allow full 6 Degrees of Freedom (6-DoF).
+
+### Thruster Vector Mapping
+| Motor | Position | Angle / Tilt | Thrust Direction | Role |
+| :--- | :--- | :--- | :--- | :--- |
+| **M0** | Front-Right | 135° | Up-Left (↖) | Horizontal / Yaw |
+| **M1** | Back-Right | 225° | Down-Left (↙) | Horizontal / Yaw |
+| **M2** | Back-Left | -45° | Down-Right (↘) | Horizontal / Yaw |
+| **M3** | Front-Left | 45° | Up-Right (↗) | Horizontal / Yaw |
+| **M4** | Right-Center| Vertical | Upward (↑) | Vertical / Roll / Pitch |
+| **M5** | Left-Center | Vertical | Upward (↑) | Vertical / Roll / Pitch |
+
+*The GCS maps joystick axes to a complex `Motion[3,3,3]` matrix, translating X, Y, and R-Z inputs into 10 distinct omnidirectional states (e.g., Forward-Right, Rotate-Left).*
+
+---
+
+
 ## 🔌 Hardware Pinout Configuration (STM32F405)
 
 ### 🚁 Thrusters (PWM Allocation)
