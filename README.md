@@ -1,86 +1,72 @@
 # 🌊 Assiut Robotics - ROV 2026 System
-![GitHub repo size](https://img.shields.io/github/repo-size/A7MEDMBS/ROV_2026)
-![GitHub stars](https://img.shields.io/github/stars/A7MEDMBS/ROV_2026?style=social)
-
 > **MATE ROV Competition - Pioneers Class (2026)**
-> The official repository for the complete Software, Hardware, and Architecture designs for the **Assiut Robotics** Remotely Operated Vehicle.
+> The official software, hardware, and architecture repository for the **Assiut Robotics** Remotely Operated Vehicle.
+
+This repository houses the complete engineering lifecycle of our ROV system, featuring a deeply optimized C/C++ firmware built on a Real-Time Operating System (FreeRTOS) and a high-performance Ground Control Station (GCS) engineered in C# WPF.
 
 ---
 
-## 📑 Table of Contents
-- [System Architecture](#-system-architecture)
-- [Hardware Stack](#-hardware-stack)
-- [Software Modules](#-software-modules)
-  - [1. Flight Controller (Firmware)](#1-flight-controller-firmware)
-  - [2. Ground Control Station (GCS)](#2-ground-control-station-gcs)
-  - [3. Vision & Telemetry Bridge (Companion Computer)](#3-vision--telemetry-bridge-companion-computer)
-  - [4. Telemetry Backend Server](#4-telemetry-backend-server)
-- [Communication Protocol (MAVLink)](#-communication-protocol)
-- [Repository Structure](#-repository-structure)
-- [Getting Started](#-getting-started)
+## 🌟 Core Technical Highlights
+*   **Mathematical Thrust Allocation:** 6-DoF control utilizing a custom $6 \times 7$ allocation matrix solved via a bounded **Cholesky decomposition** algorithm for optimal thrust distribution.
+*   **Real-Time Determinism:** Firmware architecture relies entirely on **FreeRTOS** tasks, message queues, and semaphores to guarantee deterministic execution of flight-critical loops at 50Hz.
+*   **Zero-Blocking Network IO:** MAVLink telemetry is processed entirely via **UART Direct Memory Access (DMA)**, ensuring the CPU never blocks during packet transmission or reception.
+*   **Multi-Process AI Pipeline:** The GCS isolates Computer Vision workloads by dynamically spawning isolated Python processes, communicating bounding boxes and scores back to the C# UI via a high-speed local UDP JSON bridge.
+*   **Bespoke Vector UI:** No standard controls are used. The GCS features custom-built, mathematically calculated XAML vector gauges rendering at 60FPS.
 
 ---
 
-## 🏗️ System Architecture
-Our ROV operates on a highly distributed control system designed for high reliability, deterministic execution, and ultra-low latency. The system architecture bridges the **Surface Segment (GCS)** and the **Underwater Segment (ROV)** via a high-speed Ethernet tether.
+## 💻 1. Flight Controller Firmware (STM32F405)
+Developed in C utilizing the STM32 HAL, focused on fault tolerance and sensor fusion.
+
+### Kinematics & Control Dynamics
+*   **Thruster Mapping:** Implements `Build_Allocation_Matrix` to calculate rotational torques using the cross product of physical thruster positions ($r$) and direction vectors ($d$).
+*   **Bounded Solving:** `Cholesky_Solve` ensures the overactuated 7-thruster array distributes force optimally without exceeding the hardware PWM constraints.
+*   **Live PID Tuning:** Proportional-Integral-Derivative controllers for Roll, Pitch, and Depth (with anti-windup and derivative low-pass filtering) can be tuned mid-dive over-the-air via MAVLink `DO_SET_PARAMETER` commands.
+*   **Auto Depth-Hold:** A state-machine seamlessly transitions into `DEPTH_MODE_HOLD` when no vertical manual input is detected, locking the vehicle's altitude automatically.
+
+### Sensor Fusion
+*   **Custom I2C/SPI Drivers:** Bare-metal implementations for the MPU6050 (IMU), QMC5883L (Compass), and MS5540C (Pressure).
+*   **Tilt Compensation:** The QMC5883L driver mathematically fuses magnetic vectors with the IMU's Alpha-filtered Roll and Pitch data to provide highly accurate heading regardless of vehicle orientation.
 
 ---
 
-## 🔌 Hardware Stack
-- **Main Microcontroller:** STM32F405RGT6 (ARM Cortex-M4).
-- **Companion Computer:** Raspberry Pi 4.
-- **Sensor Suite:**
-  - **IMU:** MPU6050 (6-DoF Accelerometer & Gyroscope) interfaced via I2C.
-  - **Magnetometer:** HMC5883L (Digital Compass) interfaced via I2C.
-  - **Depth/Pressure Sensor:** MS5540C interfaced via SPI.
+## 🖥️ 2. Ground Control Station (GCS)
+A multi-threaded Windows desktop application built with **C# WPF (.NET)** using a strict **MVVM (Model-View-ViewModel)** architectural pattern.
+
+### Advanced User Interface
+*   **Mathematical Gauges:** Custom UserControls (`DepthGauge`, `Compass`) dynamically calculate tick placements and needle animations using C# trigonometry, applying `TranslateTransform` and `RotateTransform` via the `Dispatcher`.
+*   **Tactile Input Mapping:** Integrates `SharpDX.DirectInput` to poll physical joysticks at 30ms intervals. Raw axes are normalized and packaged into MAVLink `SET_POSITION_TARGET_LOCAL_NED` commands.
+*   **Dynamic Configuration:** The `ConfigManager` serializes IPs, UDP Ports, Python script paths, and PID coefficients into a `config.json` file, allowing poolside modifications without recompiling the application.
+
+### Video Streaming & Computer Vision
+*   **Zero-Dependency Streaming:** The `CAMStream` module receives raw JPEG/MJPEG bytes over UDP and renders them directly into memory-safe WPF `BitmapImage` objects using `MemoryStream`, completely avoiding heavy third-party media players.
+*   **Dynamic Matrix Routing:** The pilot can hot-swap 3 concurrent UDP camera feeds across different UI viewports without tearing down the underlying socket connections.
+*   **AI Integration (`VisionTask`):** Spawns Python scripts (`Task1.py`, `Task2.py`) via `ProcessStartInfo`. An asynchronous UDP loop receives JSON-encoded `VisionPacket` data, deserializing it to draw tracking bounding boxes (`Detection`) directly onto a transparent XAML `Canvas` overlaid on the video feed.
 
 ---
 
-## 💻 Software Modules
-
-### 1. Flight Controller (Firmware) 🧠
-Located in `Software/Flight Controller/STM32F405RGT6`.
-Developed entirely in **C/C++** utilizing the **STM32 HAL** and **FreeRTOS**.
-- **Deterministic Scheduling:** FreeRTOS manages real-time tasks including sensor data acquisition, PID control loops, and telemetry transmission without blocking system resources.
-- **Non-blocking UART (DMA):** Utilizes **Direct Memory Access (DMA)** to queue and transmit MAVLink packets asynchronously, saving CPU cycles for critical control loops.
-- **Custom Hardware Drivers:** Bare-metal integration and custom filtering algorithms for the MPU6050, HMC5883L, and MS5540C sensors.
-
-### 2. Ground Control Station (GCS) 🖥️
-Located in `Software/GUI/ROV GUI Control`.
-A robust Windows desktop application built with **C# and WPF (.NET)**.
-- **MVVM Architecture:** Strictly isolates UI design (XAML) from backend logic, ensuring highly maintainable code.
-- **Custom Controls & Data Converters:** Provides real-time visual feedback for ROV orientation (Artificial Horizon), Depth, Temperature, and Thruster diagnostic status.
-- **Asynchronous Parsing:** A custom `UARTCommunication` class handles `SerialPort` events and MAVLink packet decoding in real-time.
-- **Input Handling:** Real-time joystick/gamepad input mapping to motor mixer commands.
-
-### 3. Vision & Telemetry Bridge (Companion Computer) 📷
-Python-based backend scripts deployed on the Raspberry Pi.
-- **UDP Camera Streamer (`camera_streamer.py`):** Captures multi-camera feeds and streams them to the surface via UDP sockets for minimal latency.
-- **Serial-Ethernet Bridge (`uart_udp_bridge.py`):** Relays MAVLink serial data from the STM32 to the Ethernet tether, wrapping UART packets into UDP datagrams.
-
-### 4. Telemetry Backend Server 🌐
-High-performance backend data server written in **Go (Golang)**.
-- Utilizes **Gorilla WebSockets** for real-time, bi-directional event broadcasting to web dashboards.
-- HTTP handlers for logging system events, sensor spikes, and mission-critical data.
+## 📡 3. Telemetry & Communications
+The system relies on the **MAVLink Protocol** to ensure lightweight, checksum-verified data transmission over long physical tethers.
+*   **Firmware:** A 512-byte circular DMA buffer captures incoming streams asynchronously.
+*   **GCS Backend:** The `MAVLinkHandler` decodes byte streams in real-time (`HEARTBEAT`, `SYS_STATUS`, `VFR_HUD`, `ATTITUDE`) and fires synchronized C# events.
+*   **Live Analytics:** Integrates **OxyPlot** with a `ConcurrentQueue` to render a sliding 10-second historical graph (350 data points) of water/tube pressure and temperature without locking the UI thread.
 
 ---
 
-## 📡 Communication Protocol
-The core communication relies on the **MAVLink Protocol**.
-- Ensures lightweight, checksum-verified data packets over long physical tethers.
-- Used for sending Attitude, Depth, and System Status from the ROV to the GCS.
-- Used for sending RC Channels (Joystick inputs) and commands from the GCS to the ROV.
+## 🚀 Getting Started
+
+### Prerequisites
+*   [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html) (Firmware)
+*   [Visual Studio 2022](https://visualstudio.microsoft.com/) (.NET Desktop Development)
+*   [Python 3.12+](https://www.python.org/) with OpenCV (`cv2`) for Vision Tasks.
+
+### Build Instructions
+1.  **Firmware:** Navigate to the STM32 project directory, open the `.ioc` file, generate code, compile, and flash via ST-Link.
+2.  **GCS:** Open `ROV_GUI_Control.sln` in Visual Studio, restore NuGet packages (OxyPlot, SharpDX, OpenCVSharp), and build the solution. Ensure `config.json` paths point to your local Python executable.
 
 ---
 
-## 📂 Repository Structure
-```text
-ROV_2026/
-├── Architecture/           # System block diagrams and logic flowcharts
-├── Hardware/               # PCB designs (Proteus/Altium), wiring, and schematics
-├── Software/
-│   ├── Flight Controller/  # STM32 Firmware (C/C++, FreeRTOS, HAL)
-│   ├── GUI/                # GCS Project (C# WPF, MVVM)
-│   ├── Video Streaming/    # Python UDP streaming & serial bridging scripts
-│   └── Backend/            # Go WebSocket server for telemetry logging
-└── README.md               # Documentation
+## 👨‍💻 Development
+**Assiut Robotics - Assiut University**  
+*(Computer and Control Systems Department)*
+*   **Ahmed Mostafa Bakr Selim** - *Control Software Lead & Architecture*
