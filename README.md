@@ -28,6 +28,43 @@ Developed in C utilizing the STM32 HAL, focused on fault tolerance and sensor fu
 *   **Custom I2C/SPI Drivers:** Bare-metal implementations for the MPU6050 (IMU), QMC5883L (Compass), and MS5540C (Pressure).
 *   **Tilt Compensation:** The QMC5883L driver mathematically fuses magnetic vectors with the IMU's Alpha-filtered Roll and Pitch data to provide highly accurate heading regardless of vehicle orientation.
 
+## 🔌 Hardware Pinout Configuration (STM32F405)
+
+### 🚁 Thrusters (PWM Allocation)
+The system utilizes 7 hardware PWM channels distributed across **TIM1** and **TIM8** to drive the ESCs.
+
+| Thruster ID | STM32 Pin | Hardware Timer |
+|-------------|-----------|----------------|
+| **T0**      | PA8       | TIM1_CH1       |
+| **T1**      | PA9       | TIM1_CH2       |
+| **T2**      | PA10      | TIM1_CH3       |
+| **T3**      | PA11      | TIM1_CH4       |
+| **T4**      | PC6       | TIM8_CH1       |
+| **T5**      | PC7       | TIM8_CH2       |
+| **T6**      | PC8       | TIM8_CH3       |
+
+### 🎛️ Sensor Suite (SPI & I2C)
+Sensors are distributed across multiple buses to prevent data bottlenecking.
+
+| Component / Sensor | Interface | Pin Name | STM32 Pin | Notes / Details |
+|-------------------|-----------|----------|-----------|-----------------|
+| **MS5540C** (Depth) | SPI1      | SCLK     | PA5       | Prescaler: 128, Data: 8-bit |
+|                   |           | DOUT     | PA6       | MISO |
+|                   |           | DIN      | PA7       | MOSI |
+|                   |           | MCLK     | PA0       | Driven by TIM2_CH1 |
+| **MPU6050** (IMU) | I2C1      | SCL      | PB6       | - |
+|                   |           | SDA      | PB7       | - |
+| **HMC5883L** (Mag)| I2C2      | SCL      | PB10      | - |
+|                   |           | SDA      | PB11      | - |
+
+### 📡 Telemetry & Payloads
+| Subsystem | Function | STM32 Pin | Notes / Details |
+|-----------|----------|-----------|-----------------|
+| **USART2** (MAVLink)| TX | PA2 | DMA Enabled |
+|           | RX | PA3 | DMA Enabled |
+| **LEDS**  | Dimmer PWM | PB8 | - |
+| **Gripper** | Open/Close | PB2 | GPIO |
+|           | Rotate | PC2 | GPIO |
 ---
 
 ## 🖥️ 2. Ground Control Station (GCS)
