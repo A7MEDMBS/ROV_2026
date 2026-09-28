@@ -1,5 +1,5 @@
 # 🌊 Assiut Robotics - ROV 2026 System
-> **MATE ROV Competition - Pioneers Class (2026)**
+> **ICMTC UMVC (2026)**
 > The official software, hardware, and architecture repository for the **Assiut Robotics** Remotely Operated Vehicle.
 
 This repository houses the complete engineering lifecycle of our ROV system, featuring a deeply optimized C/C++ firmware built on a Real-Time Operating System (FreeRTOS) and a high-performance Ground Control Station (GCS) engineered in C# WPF.
